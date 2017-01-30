@@ -1,0 +1,12 @@
+{
+  "name": "axioql",
+  "description": "GraphQL client that uses axios under the hood.",
+  "version": "0.0.1",
+  "repository": "https://github.com/urbancvek/axioql",
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "graphql-tag": "^1.2.3"
+  }
+}
