@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 const { modifyQuery } = require('./lib/queryModifier');
 
@@ -25,5 +25,5 @@ const axioql = async ({ query, variables } = { query: null, variables: null }) =
   }
 };
 
-module.exports = { setQLEndpoint };
-module.exports.default = axioql;
+export { setQLEndpoint };
+export default axioql;
