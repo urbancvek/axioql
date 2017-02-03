@@ -7,8 +7,8 @@ let ENDPOINT = null;
 const setQLEndpoint = (endpoint) => ENDPOINT = endpoint;
 
 const axioql = async ({ query, variables } = { query: null, variables: null }) => {
-  if (!query) throw Error('Query is required!');
-  if (!ENDPOINT) throw Error('Endpoint is required. Use setQLEndpoint(endpoint: string) method.');
+  if (!query) throw new Error('Query is required!');
+  if (!ENDPOINT) throw new Error('Endpoint is required. Use setQLEndpoint(endpoint: string) method.');
 
   const modifiedQuery = modifyQuery(query);
   const stringifiedVariables = JSON.stringify(variables);
@@ -21,7 +21,7 @@ const axioql = async ({ query, variables } = { query: null, variables: null }) =
 
     return response;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
