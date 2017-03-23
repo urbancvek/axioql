@@ -9,10 +9,13 @@ yarn add axioql
 
 ## Usage
 ```js
-import axioql, { setQLEndpoint } from 'axioql';
+import AxioQL from 'axioql';
 
 // Set the endpoint that will be used for all your GraphQL requests
-setQLEndpoint('https://graphql.server.com/graphql');
+AxioQL.setQLEndpoint('https://graphql.server.com/graphql');
+
+// If you have to authenticate use this method to set the header
+AxioQL.setAuthHeader('Bearer #sometoken#');
 
 // Create a query
 const someQuery = `query ($searchText: String!) {
@@ -31,7 +34,7 @@ const someVariables = {
 const yourAsyncMethod = async () => {
   try {
     // Fetch your data
-    const response = await axioql({ query: someQuery, variables: someVariables });
+    const response = await AxioQL.request({ query: someQuery, variables: someVariables });
 
     console.log(response.data.data);
   } catch (error) {
