@@ -1,5 +1,6 @@
-const gql = require('graphql-tag');
-const { print } = require('graphql-tag/printer');
+// @flow
+import gql from 'graphql-tag';
+import { print } from 'graphql-tag/printer';
 
 const TYPENAME_FIELD = {
   kind: 'Field',
@@ -28,7 +29,7 @@ const addTypenameToSelectionSet = (selectionSet, isRoot = false) => {
       }
     });
   }
-}
+};
 
 const addTypenameToDocument = (doc) => {
   doc.definitions.forEach((definition) => {
@@ -37,12 +38,12 @@ const addTypenameToDocument = (doc) => {
   });
 
   return doc;
-}
+};
 
 const modifyQuery = (query) => {
   const newQuery = print(addTypenameToDocument(gql`${query}`));
 
-  return newQuery
-}
+  return newQuery;
+};
 
-module.exports = { modifyQuery };
+export { modifyQuery };
