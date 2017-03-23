@@ -40,7 +40,7 @@ const addTypenameToDocument = (doc) => {
   return doc;
 };
 
-const modifyQuery = (query) => {
+const modifyQuery = (query: string) => {
   const newQuery = print(addTypenameToDocument(gql`${query}`));
 
   return newQuery;

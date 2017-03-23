@@ -1,7 +1,7 @@
 // @flow
 import axios from 'axios';
 
-import { modifyQuery } from 'queryModifier';
+import { modifyQuery } from './queryModifier';
 
 type Request = {
   query: ?string,
@@ -28,13 +28,11 @@ class AxioQL {
     const stringifiedVariables = JSON.stringify(variables);
 
     try {
-      const response = await axios.post(this.endpoint, {
-        query: modifiedQuery,
-        variables: stringifiedVariables,
-        headers: {
-          Authorization: this.authHeader,
-        },
-      });
+      const response = await axios.post(
+        this.endpoint,
+        { query: modifiedQuery, variables: stringifiedVariables },
+        this.authHeader ? { headers: { 'Authorization': this.authHeader } } : {},
+      );
 
       return response;
     } catch (error) {
