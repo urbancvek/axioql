@@ -17,6 +17,10 @@ AxioQL.setQLEndpoint('https://graphql.server.com/graphql');
 // If you have to authenticate use this method to set the header
 AxioQL.setAuthHeader('Bearer #sometoken#');
 
+// If you wish to add fields to the HTTP header use this method
+AxioQL.setExtraHeader('someHeaderFieldName', 'some value');
+
+
 // Create a query
 const someQuery = `query ($searchText: String!) {
   productSearch(title: $searchText) {
