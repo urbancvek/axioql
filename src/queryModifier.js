@@ -1,6 +1,6 @@
 // @flow
 import gql from 'graphql-tag';
-import { print } from 'graphql-tag/printer';
+import { print } from 'graphql/language/printer';
 
 const TYPENAME_FIELD = {
   kind: 'Field',

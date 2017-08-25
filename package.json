@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "graphql": "^0.10.5",
     "graphql-tag": "^1.2.3"
   }
 }
