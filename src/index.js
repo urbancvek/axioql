@@ -11,6 +11,8 @@ type Request = {
 class AxioQL {
   endpoint: ?string;
   authHeader: ?string;
+  extraHeaders: ?Object;
+  timeout: ?number;
 
   setQLEndpoint(endpoint: string) {
     this.endpoint = endpoint;
@@ -18,6 +20,18 @@ class AxioQL {
 
   setAuthHeader(header: string) {
     this.authHeader = header;
+  }
+
+  setExtraHeader(headerName: string, value: string) {
+    // Create extraHeaders property if it doens't exist
+    if (!this.extraHeaders) {
+      this.extraHeaders = {};
+    }
+    this.extraHeaders[headerName] = value;
+  }
+
+  setTimeout(seconds: number) {
+    this.timeout = seconds;
   }
 
   async request({ query, variables }: Request = { query: null, variables: null }) {
@@ -31,7 +45,8 @@ class AxioQL {
       const response = await axios.post(
         this.endpoint,
         { query: modifiedQuery, variables: stringifiedVariables },
-        this.authHeader ? { headers: { 'Authorization': this.authHeader } } : {},
+        this.authHeader ? { headers: { ...this.extraHeaders, Authorization: this.authHeader } } : {},
+        { timeout: this.timeout ? this.timeout : 1000 }
       );
 
       return response;
