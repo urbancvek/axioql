@@ -11,6 +11,8 @@ type Request = {
 class AxioQL {
   endpoint: ?string;
   authHeader: ?string;
+  extraHeaders: ?Object;
+  timeout: ?number;
 
   setQLEndpoint(endpoint: string) {
     this.endpoint = endpoint;
@@ -28,6 +30,10 @@ class AxioQL {
     this.extraHeaders[headerName] = value;
   }
 
+  setTimeout(seconds: number) {
+    this.timeout = seconds;
+  }
+
   async request({ query, variables }: Request = { query: null, variables: null }) {
     if (!query) throw new Error('Query is required!');
     if (!this.endpoint) throw new Error('Endpoint is required. Use AxioQL.setQLEndpoint(endpoint: string) method.');
@@ -40,6 +46,7 @@ class AxioQL {
         this.endpoint,
         { query: modifiedQuery, variables: stringifiedVariables },
         this.authHeader ? { headers: { ...this.extraHeaders, Authorization: this.authHeader } } : {},
+        { timeout: this.timeout ? this.timeout : 1000 }
       );
 
       return response;
